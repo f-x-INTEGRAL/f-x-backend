@@ -19,6 +19,7 @@ public class FormController {
     @PostMapping("/form/save")
     public String formSave(@RequestBody Order order) {
         orderService.save(order);
+        log.info("order={}", order);
 
         return "ok";
     }
