@@ -14,11 +14,9 @@ public class OrderService {
 
     private final OrderRepository orderRepository;
 
-    public Order save(Order order) {
+    public void save(Order order) {
         validateDuplicatePhoneNumber(order);
         orderRepository.save(order);
-
-        return order;
     }
 
     private void validateDuplicatePhoneNumber(Order order) {
