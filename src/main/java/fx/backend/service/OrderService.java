@@ -34,6 +34,11 @@ public class OrderService {
     }
 
     public Optional<Order> findById(Long Id){
-        return orderRepository.findById(Id);
+        Optional<Order> order = orderRepository.findById(Id);
+                order.ifPresent(a -> {
+            throw new IllegalArgumentException("유효하지 않은 ID 입니다");
+        });
+
+        return order;
     }
 }
