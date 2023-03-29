@@ -27,6 +27,10 @@ public class OrderService {
         });
     }
 
+    public Optional<Order> findByPhoneNumber(Long phoneNumber) {
+        return orderRepository.findByPhoneNumber(phoneNumber);
+    }
+
     public List<Order> findAll() {
         return orderRepository.findAlL();
     }
