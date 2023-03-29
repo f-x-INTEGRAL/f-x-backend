@@ -4,10 +4,9 @@ import fx.backend.domain.Order;
 import fx.backend.service.OrderService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 
 @Slf4j
 @RestController
@@ -15,19 +14,22 @@ import java.util.concurrent.ConcurrentHashMap;
 @RequestMapping("/api")
 public class FormController {
     private final OrderService orderService;
-    @PostMapping("/form/save")
-    public Map<Order, String> formSave(@ModelAttribute Order order) {
-        Map<Order, String> respData = new ConcurrentHashMap<>();
 
+    /**
+     * Body의 메세지를 받아 저장하고, 그 과정에서 같은 유저가 있는지 검증한다.
+     *
+     * @param order
+     * @return HttpSratus 201, 422
+     */
+
+    @PostMapping("/form/save")
+    public ResponseEntity<?> fromAdd(@ModelAttribute Order order) {
         try {
             orderService.save(order);
         } catch (IllegalArgumentException e) {
-            respData.put(order, e.getMessage());
-            return respData;
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.UNPROCESSABLE_ENTITY);
         }
-        log.info("order={}", order);
-        respData.put(order, "정상적으로 처리 되었습니다.");
 
-        return respData;
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 }
