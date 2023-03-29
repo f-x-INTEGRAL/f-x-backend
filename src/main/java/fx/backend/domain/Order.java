@@ -9,9 +9,9 @@ public class Order {
     private Integer headCount;
     private Long phoneNumber;
     private String bankName;
+    private OrderStatus status = OrderStatus.WAITING;
 
-    public Order(Long ID, String name, Integer headCount, Long phoneNumber, String bankName) {
-        this.ID = ID;
+    public Order(String name, Integer headCount, Long phoneNumber, String bankName) {
         this.name = name;
         this.headCount = headCount;
         this.phoneNumber = phoneNumber;
