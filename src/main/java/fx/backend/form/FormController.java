@@ -35,10 +35,20 @@ public class FormController {
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
-    @PostMapping("/form/find/{orderid}")
-    public ResponseEntity<?> findOrderById(@PathVariable Long orderid) {
-         Optional<Order> order = orderService.findById(orderid);
+    /**
+     * GET 요청으로 orderId를 받아, 해당 orderId에 맞는 order 를 반환 한다
+     *
+     * @param orderId
+     * @return Order
+     */
 
-        return new ResponseEntity<>(order, HttpStatus.OK);
+    @GetMapping("/form/{orderId}")
+    public ResponseEntity<?> findOrderById(@PathVariable Long orderId) {
+        Optional<Order> orderById = orderService.findById(orderId);
+
+        if (orderById.isEmpty()) {
+            return new ResponseEntity<>("대상을 찾을 수 없습니다.",HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<>(orderById, HttpStatus.OK);
     }
 }
