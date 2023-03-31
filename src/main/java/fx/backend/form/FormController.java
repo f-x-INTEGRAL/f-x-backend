@@ -26,6 +26,7 @@ public class FormController {
 
     @PostMapping("/form/save")
     public ResponseEntity<?> fromSave(@ModelAttribute Order order) {
+        log.info("order={}", order);
         try {
             orderService.save(order);
         } catch (IllegalArgumentException e) {
@@ -49,6 +50,9 @@ public class FormController {
         if (orderById.isEmpty()) {
             return new ResponseEntity<>("대상을 찾을 수 없습니다.",HttpStatus.BAD_REQUEST);
         }
+
+        log.info("orderById={}", orderById);
+
         return new ResponseEntity<>(orderById, HttpStatus.OK);
     }
 }
