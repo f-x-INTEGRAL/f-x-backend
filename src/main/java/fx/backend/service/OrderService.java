@@ -15,6 +15,7 @@ public class OrderService {
     private final OrderRepository orderRepository;
 
     public void save(Order order) {
+        
         validateDuplicatePhoneNumber(order);
         orderRepository.save(order);
     }
@@ -25,7 +26,7 @@ public class OrderService {
         });
     }
 
-    public Optional<Order> findByPhoneNumber(Long phoneNumber) {
+    public Optional<Order> findByPhoneNumber(String phoneNumber) {
         return orderRepository.findByPhoneNumber(phoneNumber);
     }
 

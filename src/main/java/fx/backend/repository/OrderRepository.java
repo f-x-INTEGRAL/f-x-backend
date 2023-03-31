@@ -8,6 +8,6 @@ import java.util.Optional;
 public interface OrderRepository {
     Order save(Order order);
     Optional<Order> findById(Long id);
-    Optional<Order> findByPhoneNumber(Long phoneNumber);
+    Optional<Order> findByPhoneNumber(String phoneNumber);
     List<Order> findAlL();
 }
