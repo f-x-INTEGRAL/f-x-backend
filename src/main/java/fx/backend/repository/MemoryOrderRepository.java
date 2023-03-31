@@ -27,9 +27,9 @@ public class MemoryOrderRepository implements OrderRepository {
     }
 
     @Override
-    public Optional<Order> findByPhoneNumber(Long phoneNumber) {
+    public Optional<Order> findByPhoneNumber(String phoneNumber) {
         return orderMap.values().stream()
-                .filter(order -> order.getPhoneNumber().equals(phoneNumber))
+                .filter(order -> Objects.equals(order.getPhoneNumber(), phoneNumber))
                 .findAny();
     }
 
