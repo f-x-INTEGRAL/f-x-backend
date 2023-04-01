@@ -15,7 +15,7 @@ public class OrderService {
     private final OrderRepository orderRepository;
 
     public void save(Order order) {
-        
+
         validateDuplicatePhoneNumber(order);
         orderRepository.save(order);
     }
@@ -28,6 +28,12 @@ public class OrderService {
 
     public Optional<Order> findByPhoneNumber(String phoneNumber) {
         return orderRepository.findByPhoneNumber(phoneNumber);
+    }
+
+    public Optional<Long> deleteOrder(Long orderId) {
+        orderRepository.deleteOrder(orderId);
+
+        return Optional.ofNullable(orderId);
     }
 
     public List<Order> findAll() {
