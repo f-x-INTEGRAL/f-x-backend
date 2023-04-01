@@ -4,9 +4,8 @@ import fx.backend.domain.Order;
 import fx.backend.service.OrderService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.RequestEntity;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -33,6 +32,20 @@ public class AdminController {
 
     @PostMapping("/find-all")
     public List<Order> findAllOrder() {
+
         return orderService.findAll();
     }
+
+    @DeleteMapping("/delete/{orderId}")
+    public ResponseEntity<?> deleteOrder(@PathVariable Long orderId) {
+        orderService.deleteOrder(orderId);
+
+        return new ResponseEntity<>(orderId + "번 티켓이 삭제되었습니다.", HttpStatus.OK);
+    }
+
+//    @PatchMapping("/edit/{orderId}")
+//    public ResponseEntity<?> editOrder(@PathVariable Long orderId) {
+//
+//
+//    }
 }
