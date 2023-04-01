@@ -37,4 +37,25 @@ public class MemoryOrderRepository implements OrderRepository {
     public List<Order> findAlL() {
         return new ArrayList<>(orderMap.values());
     }
+
+    @Override
+    public Optional<Long> deleteOrder(Long orderId) {
+        orderMap.remove(orderId);
+
+        return Optional.ofNullable(orderId);
+    }
+
+    @Override
+    public Optional<Order> editOrder(Long orderId, Order order) {
+        deleteOrder(orderId);
+        orderMap.put(orderId, order);
+
+        return Optional.ofNullable(orderMap.get(orderId));
+    }
+
+    @Override
+    public void clearAll() {
+        orderMap.clear();
+        sequence.set(0L);
+    }
 }
