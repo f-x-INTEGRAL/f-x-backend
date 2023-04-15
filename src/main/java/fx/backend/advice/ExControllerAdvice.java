@@ -6,6 +6,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import java.util.NoSuchElementException;
+
 @Slf4j
 @RestControllerAdvice(basePackageClasses = FormController.class)
 public class ExControllerAdvice {
@@ -15,4 +17,10 @@ public class ExControllerAdvice {
         return ResponseEntity.status(409).body(e.getMessage());
     }
 
+    @ExceptionHandler(NoSuchElementException.class)
+    public ResponseEntity<String> NoSuchElementHandler(NoSuchElementException e) {
+        log.info("[exceptionHandler] ex");
+
+        return ResponseEntity.notFound().build();
+    }
 }
