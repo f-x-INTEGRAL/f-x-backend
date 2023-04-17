@@ -5,5 +5,6 @@ CREATE TABLE orders (
     phone_number varchar(20),
     bank_name varchar(10),
     status varchar(10),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     primary key (id)
 );
