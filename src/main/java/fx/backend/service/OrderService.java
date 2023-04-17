@@ -1,5 +1,6 @@
 package fx.backend.service;
 
+import fx.backend.domain.OrderStatus;
 import fx.backend.domain.Orders;
 import fx.backend.repository.OrderRepository;
 import jakarta.transaction.Transactional;
@@ -32,11 +33,11 @@ public class OrderService {
         return orderRepository.findByPhoneNumber(phoneNumber);
     }
 
-    public Orders updateOrder(Long orderId, Orders order) {
+    public Orders updateOrderStatus(Long orderId, OrderStatus status) {
         Orders orders = findById(orderId);
 
-        orders.setStatus(order.getStatus());
-        save(orders);
+        orders.setStatus(status);
+        orderRepository.save(orders);
 
         return orders;
     }
