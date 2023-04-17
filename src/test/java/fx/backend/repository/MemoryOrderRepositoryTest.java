@@ -24,7 +24,7 @@ class MemoryOrderRepositoryTest {
         orderRepository.save(order1);
 
         Long testLong = 1L;
-        orderRepository.deleteOrder(testLong);
+        orderRepository.deleteById(testLong);
 
         assertThat(orderRepository.findAlL()).isEmpty();
     }
