@@ -21,6 +21,6 @@ public class ExControllerAdvice {
     public ResponseEntity<String> NoSuchElementHandler(NoSuchElementException e) {
         log.info("[exceptionHandler] ex");
 
-        return ResponseEntity.notFound().build();
+        return ResponseEntity.status(404).body(e.getMessage());
     }
 }
