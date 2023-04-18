@@ -8,4 +8,4 @@ FROM eclipse-temurin:latest
 ENV password=
 COPY --from=Builder /Fxbackend/build/libs/*.jar Fxbackend.jar
 EXPOSE 8080
-ENTRYPOINT ["java", "-jar", "-Dadmin.password=$password", "/Fxbackend.jar"]
+ENTRYPOINT ["java", "-jar", "-Dadmin.password=${password}", "/Fxbackend.jar"]
