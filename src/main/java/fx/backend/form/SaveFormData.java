@@ -1,4 +1,4 @@
-package fx.backend.domain;
+package fx.backend.form;
 
 import jakarta.validation.constraints.*;
 import lombok.Data;
