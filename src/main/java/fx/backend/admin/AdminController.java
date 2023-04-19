@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.naming.LimitExceededException;
 import java.util.List;
 
 @Slf4j
@@ -34,7 +35,9 @@ public class AdminController {
     }
 
     @PatchMapping("/update/{orderId}")
-    public ResponseEntity<Orders> updateOrder(@PathVariable Long orderId, @RequestBody AdminVO adminVO, @SessionAttribute String password){
+    public ResponseEntity<Orders> updateOrder(@PathVariable Long orderId, @RequestBody AdminVO adminVO, @SessionAttribute String password) throws LimitExceededException {
+        orderService.validateConformedQuantity();
+
         OrderStatus status = adminVO.getStatus();
         Orders updateOrder = orderService.updateOrderStatus(orderId, status);
 

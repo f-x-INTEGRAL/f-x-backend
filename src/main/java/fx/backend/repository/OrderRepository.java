@@ -11,4 +11,5 @@ public interface OrderRepository {
     Optional<Orders> findByPhoneNumber(String phoneNumber);
     List<Orders> findAll();
    void deleteById(Long orderId);
+   Long sumConformedOrdersQuantity();
 }

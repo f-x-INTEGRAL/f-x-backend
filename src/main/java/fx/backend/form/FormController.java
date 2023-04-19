@@ -1,5 +1,6 @@
 package fx.backend.form;
 
+import fx.backend.domain.OrderStatus;
 import fx.backend.domain.Orders;
 import fx.backend.service.OrderService;
 import lombok.RequiredArgsConstructor;
@@ -9,6 +10,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+
+import javax.naming.LimitExceededException;
 
 
 @Slf4j
@@ -28,12 +31,13 @@ public class FormController {
      */
 
     @PostMapping("/form/save")
-    public ResponseEntity<?> fromSave(@Validated @ModelAttribute SaveFormData saveFormData, BindingResult bindingResult) {
+    public ResponseEntity<?> fromSave(@Validated @ModelAttribute SaveFormData saveFormData, BindingResult bindingResult) throws LimitExceededException {
 
         if(bindingResult.hasErrors()){
             String errorMessage = bindingResult.getAllErrors().get(0).getDefaultMessage();
             return ResponseEntity.badRequest().body(errorMessage);
         }
+        orderService.validateConformedQuantity();
 
         Orders orders = new Orders(
                 saveFormData.getName(),
