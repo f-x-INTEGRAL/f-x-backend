@@ -13,9 +13,9 @@ public class SpringConfig implements WebMvcConfigurer {
     public void addCorsMappings(CorsRegistry registry) {
         registry
                 .addMapping("/**")
-                .allowedOrigins("")
-                .allowedHeaders("https://nabom.live", "https://f-x-frontend.vercel.app")
-                .allowedMethods("*")
+                .allowedOrigins("https://nabom.live\", \"https://f-x-frontend.vercel.app\"")
+                .allowedHeaders("")
+                .allowedMethods("GET", "POST", "DELETE", "PATCH")
                 .allowCredentials(true)
                 .maxAge(3600);
     }
