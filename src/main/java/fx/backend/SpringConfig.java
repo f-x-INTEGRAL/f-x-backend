@@ -14,7 +14,7 @@ public class SpringConfig implements WebMvcConfigurer {
         registry
                 .addMapping("/**")
                 .allowedOrigins("")
-                .allowedHeaders("https://nabom.live", "https://f-x-frontend.vercel.app/")
+                .allowedHeaders("https://nabom.live", "https://f-x-frontend.vercel.app")
                 .allowedMethods("*")
                 .allowCredentials(true)
                 .maxAge(3600);
