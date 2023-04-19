@@ -28,6 +28,10 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
+      - name: set application.properties file
+        run: |
+          echo "${{ secrets.SENTRY }}" >> src/main/resources/application.properties
+
       - name: Docker build & push
         uses: docker/build-push-action@v4
         with:
