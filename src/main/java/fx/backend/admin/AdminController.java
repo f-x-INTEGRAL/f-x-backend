@@ -22,7 +22,9 @@ public class AdminController {
     private final OrderService orderService;
 
     @PostMapping("/login")
-    public ResponseEntity<?> login(HttpSession session, @RequestParam String password) {
+    public ResponseEntity<?> login(HttpSession session, @RequestBody AdminVO adminVO) {
+        String password = adminVO.getPassword();
+
         if (orderService.login(password)) {
             session.setAttribute("password", password);
             return ResponseEntity.ok().build();
@@ -32,7 +34,8 @@ public class AdminController {
     }
 
     @PatchMapping("/update/{orderId}")
-    public ResponseEntity<Orders> updateOrder(@PathVariable Long orderId, @ModelAttribute("status") OrderStatus status, @SessionAttribute String password){
+    public ResponseEntity<Orders> updateOrder(@PathVariable Long orderId, @RequestBody AdminVO adminVO, @SessionAttribute String password){
+        OrderStatus status = adminVO.getStatus();
         Orders updateOrder = orderService.updateOrderStatus(orderId, status);
 
         return ResponseEntity.ok(updateOrder);
