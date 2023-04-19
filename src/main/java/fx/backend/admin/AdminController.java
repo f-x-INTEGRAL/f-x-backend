@@ -14,7 +14,6 @@ import javax.naming.LimitExceededException;
 import java.util.List;
 
 @Slf4j
-@CrossOrigin("*")
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/admin")
