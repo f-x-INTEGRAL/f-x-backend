@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Service;
 
+import javax.naming.LimitExceededException;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
@@ -47,6 +48,17 @@ public class OrderService {
         orderRepository.save(orders);
 
         return orders;
+    }
+
+    public void validateConformedQuantity() throws LimitExceededException {
+        Long quantity = orderRepository.sumConformedOrdersQuantity();
+        log.info("ConformedQuantity={}", quantity);
+
+        if (quantity == null)
+            quantity = 0L;
+
+        if (quantity > 150)
+            throw new LimitExceededException("티켓이 모두 소진되었습니다");
     }
 
     public void deleteOrder(Long orderId) {

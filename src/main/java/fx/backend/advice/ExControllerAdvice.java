@@ -6,10 +6,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import javax.naming.LimitExceededException;
 import java.util.NoSuchElementException;
 
 @Slf4j
-@RestControllerAdvice(basePackageClasses = FormController.class)
+@RestControllerAdvice
 public class ExControllerAdvice {
     @ExceptionHandler(IllegalArgumentException.class)
     public ResponseEntity<String> illegalExHandler(IllegalArgumentException e) {
@@ -22,5 +23,11 @@ public class ExControllerAdvice {
         log.info("[exceptionHandler] ex");
 
         return ResponseEntity.status(404).body(e.getMessage());
+    }
+    @ExceptionHandler(LimitExceededException.class)
+    public ResponseEntity<String> limitExceededHandler(LimitExceededException e) {
+        log.error("[exceptionHandler] ex", e);
+
+        return ResponseEntity.badRequest().body(e.getMessage());
     }
 }
