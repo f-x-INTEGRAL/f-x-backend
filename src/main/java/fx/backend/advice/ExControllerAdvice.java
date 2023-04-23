@@ -12,13 +12,13 @@ import java.util.NoSuchElementException;
 @Slf4j
 @RestControllerAdvice
 public class ExControllerAdvice {
-    @ExceptionHandler(IllegalArgumentException.class)
-    public ResponseEntity<String> illegalExHandler(IllegalArgumentException e) {
-        log.error("[exceptionHandler] ex", e);
-        Sentry.captureException(e);
-
-        return ResponseEntity.status(409).body(e.getMessage());
-    }
+//    @ExceptionHandler(IllegalArgumentException.class)
+//    public ResponseEntity<String> illegalExHandler(IllegalArgumentException e) {
+//        log.error("[exceptionHandler] ex", e);
+//        Sentry.captureException(e);
+//
+//        return ResponseEntity.status(409).body(e.getMessage());
+//    }
 
     @ExceptionHandler(NoSuchElementException.class)
     public ResponseEntity<String> NoSuchElementHandler(NoSuchElementException e) {

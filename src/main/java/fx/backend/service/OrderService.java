@@ -27,7 +27,7 @@ public class OrderService {
     private final OrderRepository orderRepository;
 
     public void save(Orders orders) {
-        validateDuplicatePhoneNumber(orders);
+        //validateDuplicatePhoneNumber(orders);
         orderRepository.save(orders);
     }
 
