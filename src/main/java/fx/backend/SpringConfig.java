@@ -13,7 +13,7 @@ public class SpringConfig implements WebMvcConfigurer {
     public void addCorsMappings(CorsRegistry registry) {
         registry
                 .addMapping("/**")
-                .allowedOrigins("https://nabom.live", "https://f-x-frontend.vercel.app", "f-x-frontend-develop.vercel.app")
+                .allowedOrigins("https://nabom.live", "https://f-x-frontend.vercel.app", "https://f-x-frontend-develop.vercel.app")
                 .allowedHeaders("*")
                 .allowedMethods("GET", "POST", "DELETE", "PATCH")
                 .allowCredentials(true)
