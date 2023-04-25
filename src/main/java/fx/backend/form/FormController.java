@@ -15,7 +15,6 @@ import javax.naming.LimitExceededException;
 
 
 @Slf4j
-@CrossOrigin("*")
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api")
